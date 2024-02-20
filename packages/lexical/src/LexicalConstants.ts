@@ -78,6 +78,8 @@ export const COMPOSITION_SUFFIX: string =
     ? NON_BREAKING_SPACE
     : ZERO_WIDTH_SPACE;
 export const DOUBLE_LINE_BREAK = '\n\n';
+export const KOREAN_10KEY_COMPOSER = 'ᆞ';
+export const KOREAN_10KEY_COMPOSER2 = 'ᆢ';
 
 // For FF, we need to use a non-breaking space, or it gets composition
 // in a stuck state.

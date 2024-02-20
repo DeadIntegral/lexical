@@ -35,7 +35,12 @@ import {
   SELECTION_CHANGE_COMMAND,
   TextNode,
 } from '.';
-import {DOM_ELEMENT_TYPE, TEXT_TYPE_TO_FORMAT} from './LexicalConstants';
+import {
+  DOM_ELEMENT_TYPE,
+  KOREAN_10KEY_COMPOSER,
+  KOREAN_10KEY_COMPOSER2,
+  TEXT_TYPE_TO_FORMAT,
+} from './LexicalConstants';
 import {
   markCollapsedSelectionFormat,
   markSelectionChangeFromDOMUpdate,
@@ -2414,7 +2419,12 @@ function $updateCaretSelectionForUnicodeCharacter(
       const text = anchorNode.getTextContent().slice(startOffset, endOffset);
       if (!doesContainGrapheme(text)) {
         if (isBackward) {
-          focus.offset = characterOffset;
+          const adjustOffset =
+            text.indexOf(KOREAN_10KEY_COMPOSER) > -1 ||
+            text.indexOf(KOREAN_10KEY_COMPOSER2) > -1
+              ? 1
+              : 0;
+          focus.offset = characterOffset - adjustOffset;
         } else {
           anchor.offset = characterOffset;
         }
